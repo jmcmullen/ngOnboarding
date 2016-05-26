@@ -54,7 +54,7 @@ app.directive 'onboardingPopover', ['ngOnboardingDefaults', '$sce', '$timeout', 
   link: (scope, element, attrs) ->
     # Important Variables
     curStep = null
-    attributesToClear = ['title', 'top', 'right', 'bottom', 'left', 'width', 'height', 'position']
+    attributesToClear = ['title', 'top', 'right', 'bottom', 'left', 'width', 'height', 'position', 'style']
 
     # Button Actions
     scope.next = -> scope.index = scope.index + 1
@@ -153,7 +153,7 @@ app.directive 'onboardingPopover', ['ngOnboardingDefaults', '$sce', '$timeout', 
   template: """
               <div class='onboarding-container' ng-show='enabled'>
                 <div class='{{overlayClass}}' ng-style='{opacity: overlayOpacity}', ng-show='overlay'></div>
-                <div class='{{popoverClass}} {{positionClass}}' ng-style="{width: width, height: height, left: left, top: top, right: right, bottom: bottom}">
+                <div class='{{popoverClass}} {{positionClass}}' ng-style="{width: width, height: height, left: left, top: top, right: right, bottom: bottom}" ng-style='{style}'>
                   <div class='{{arrowClass}}'></div>
                   <h3 class='{{titleClass}}' ng-show='title' ng-bind='title'></h3>
                   <a href='' ng-click='close()' class='{{closeButtonClass}}' ng-bind-html='closeButtonText'></a>

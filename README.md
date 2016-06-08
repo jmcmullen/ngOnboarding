@@ -6,7 +6,7 @@ ngOnboarding is a tooltip tutorial / onboarding framework for [Angular.js](http:
 
 ## Dependencies
 
-This library requires Angular.js 1.2 or greater along with any recent version of jQuery.
+This library requires Angular.js 1.2.
 
 ## Installation
 

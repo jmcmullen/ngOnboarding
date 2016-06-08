@@ -3,16 +3,17 @@
   "version": "0.1.8",
   "repository": {
     "type": "git",
-    "url": "https://github.com/adamalbrecht/ngOnboarding"
+    "url": "https://github.com/jmcmullen/ngOnboarding"
   },
   "devDependencies": {
+    "coffee-script": "^1.10.0",
     "grunt": "~0.4.1",
     "grunt-contrib-coffee": "~0.7",
-    "grunt-contrib-watch": "~0.5",
-    "grunt-contrib-uglify": "~0.2",
-    "karma": "~0.10",
-    "karma-coffee-preprocessor": "~0.1",
     "grunt-contrib-less": "~0.8.2",
-    "grunt-zip": "~0.12.0"
+    "grunt-contrib-uglify": "~0.2",
+    "grunt-contrib-watch": "~0.5",
+    "grunt-zip": "~0.12.0",
+    "karma": "~0.10",
+    "karma-coffee-preprocessor": "~0.1"
   }
 }

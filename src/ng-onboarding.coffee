@@ -1,9 +1,9 @@
 #
 # ngOnboarding
-# by Adam Albrecht
+# by Adam Albrecht forked by Jay McMullen
 # http://adamalbrecht.com
 #
-# Source Code: https://github.com/adamalbrecht/ngOnboarding
+# Source Code: https://github.com/jmcmullen/ngOnboarding
 #
 # Compatible with Angular 1.2.x
 #
@@ -22,12 +22,12 @@ app.provider "ngOnboardingDefaults", ->
     buttonContainerClass: 'onboarding-button-container',
     buttonClass: "onboarding-button",
     showButtons: true,
-    nextButtonText: 'Next &rarr;',
-    previousButtonText: '&larr; Previous',
+    nextButtonText: 'Next',
+    previousButtonText: 'Previous',
     showDoneButton: true,
     doneButtonText: 'Done',
     closeButtonClass: 'onboarding-close-button',
-    closeButtonText: 'X',
+    closeButtonText: '&times;',
     stepClass: 'onboarding-step-info',
     actualStepText: 'Step',
     totalStepText: 'of',
@@ -97,13 +97,19 @@ app.directive 'onboardingPopover', ['ngOnboardingDefaults', '$sce', '$timeout', 
       setupPositioning()
 
     setupOverlay = (showOverlay=true) ->
-      $('.onboarding-focus').removeClass('onboarding-focus')
+      onboardingFocus = document.querySelectorAll('.onboarding-focus')
+      $onboardingFocus = angular.element(onboardingFocus)
+      $onboardingFocus.removeClass('onboarding-focus')
       if showOverlay
         if curStep['attachTo'] && scope.overlay
-          $(curStep['attachTo']).addClass('onboarding-focus')
+          attachTo = document.querySelectorAll(curStep['attachTo'])[0]
+          $attachTo = angular.element(attachTo)
+          $attachTo.addClass('onboarding-focus')
 
     setupPositioning = ->
-      attachTo = curStep['attachTo']
+      # attachTo = curStep['attachTo']
+      attachTo = document.querySelectorAll(curStep['attachTo'])[0]
+      $attachTo = angular.element(attachTo)[0]
       scope.position = curStep['position']
       xMargin = 15
       yMargin = 15
@@ -113,11 +119,11 @@ app.directive 'onboardingPopover', ['ngOnboardingDefaults', '$sce', '$timeout', 
           left = null
           right = null
           if scope.position == 'right'
-            left = $(attachTo).offset().left + $(attachTo).outerWidth() + xMargin
+            left = $attachTo.getBoundingClientRect().left + $attachTo.offsetWidth + xMargin
           else if scope.position == 'left'
-            right = $(window).width() - $(attachTo).offset().left + xMargin
+            right = window.innerWidth - $attachTo.getBoundingClientRect().left + xMargin
           else if scope.position == 'top' || scope.position == 'bottom'
-            left = $(attachTo).offset().left
+            left = $attachTo.getBoundingClientRect().left
           if curStep['xOffset']
             left = left + curStep['xOffset'] if left != null
             right = right - curStep['xOffset'] if right != null
@@ -129,11 +135,11 @@ app.directive 'onboardingPopover', ['ngOnboardingDefaults', '$sce', '$timeout', 
           top = null
           bottom = null
           if scope.position == 'left' || scope.position == 'right'
-            top = $(attachTo).offset().top
+            top = $attachTo.getBoundingClientRect().top
           else if scope.position == 'bottom'
-            top = $(attachTo).offset().top + $(attachTo).outerHeight() + yMargin
+            top = $attachTo.getBoundingClientRect().top + $attachTo.outerHeight() + yMargin
           else if scope.position == 'top'
-            bottom = $(window).height() - $(attachTo).offset().top + yMargin
+            bottom = window.innerHeight - $attachTo.getBoundingClientRect().top + yMargin
 
 
           if curStep['yOffset']
@@ -153,7 +159,7 @@ app.directive 'onboardingPopover', ['ngOnboardingDefaults', '$sce', '$timeout', 
   template: """
               <div class='onboarding-container' ng-show='enabled'>
                 <div class='{{overlayClass}}' ng-style='{opacity: overlayOpacity}', ng-show='overlay'></div>
-                <div class='{{popoverClass}} {{positionClass}}' ng-style="{width: width, height: height, left: left, top: top, right: right, bottom: bottom}" ng-style='{style}'>
+                <div class='{{popoverClass}} {{positionClass}}' ng-style="{width: width + 'px', height: height + 'px', left: left + 'px', top: top + 'px', right: right + 'px', bottom: bottom + 'px'}">
                   <div class='{{arrowClass}}'></div>
                   <h3 class='{{titleClass}}' ng-show='title' ng-bind='title'></h3>
                   <a href='' ng-click='close()' class='{{closeButtonClass}}' ng-bind-html='closeButtonText'></a>

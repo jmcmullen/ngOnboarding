@@ -59,7 +59,7 @@ app.directive 'onboardingPopover', ['ngOnboardingDefaults', '$sce', '$timeout', 
     # Button Actions
     scope.next = -> scope.index = scope.index + 1
     scope.previous = -> scope.index = scope.index - 1
-    scope.close = ->
+    scope.finished = ->
       scope.enabled = false
       setupOverlay(false)
       if scope.onFinishCallback
@@ -162,7 +162,7 @@ app.directive 'onboardingPopover', ['ngOnboardingDefaults', '$sce', '$timeout', 
                 <div class='{{popoverClass}} {{positionClass}}' ng-style="{width: width + 'px', height: height + 'px', left: left + 'px', top: top + 'px', right: right + 'px', bottom: bottom + 'px'}">
                   <div class='{{arrowClass}}'></div>
                   <h3 class='{{titleClass}}' ng-show='title' ng-bind='title'></h3>
-                  <a href='' ng-click='close()' class='{{closeButtonClass}}' ng-bind-html='closeButtonText'></a>
+                  <a href='' ng-click='finished()' class='{{closeButtonClass}}' ng-bind-html='closeButtonText'></a>
                   <div class='{{contentClass}}'>
                     <p ng-bind-html='description'></p>
                   </div>
@@ -170,7 +170,7 @@ app.directive 'onboardingPopover', ['ngOnboardingDefaults', '$sce', '$timeout', 
                     <span ng-show='showStepInfo' class='{{stepClass}}'>{{actualStepText}} {{index + 1}} {{totalStepText}} {{stepCount}}</span>
                     <a href='' ng-click='previous()' ng-show='showPreviousButton' class='{{buttonClass}}' ng-bind-html='previousButtonText'></a>
                     <a href='' ng-click='next()' ng-show='showNextButton' class='{{buttonClass}}' ng-bind-html='nextButtonText'></a>
-                    <a href='' ng-click='close()' ng-show='showDoneButton && lastStep' class='{{buttonClass}}' ng-bind-html='doneButtonText'></a>
+                    <a href='' ng-click='finished()' ng-show='showDoneButton && lastStep' class='{{buttonClass}}' ng-bind-html='doneButtonText'></a>
                   </div>
                 </div>
               </div>

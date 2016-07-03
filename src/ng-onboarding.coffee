@@ -153,8 +153,8 @@ app.directive 'onboardingPopover', ['ngOnboardingDefaults', '$sce', '$timeout', 
       else
         scope.positionClass = null
 
-    if scope.steps.length && !scope.index
-      scope.index = 0
+#    if scope.steps.length && !scope.index
+#      scope.index = 0
 
   template: """
               <div class='onboarding-container' ng-show='enabled'>

@@ -137,7 +137,7 @@ app.directive 'onboardingPopover', ['ngOnboardingDefaults', '$sce', '$timeout', 
           if scope.position == 'left' || scope.position == 'right'
             top = $attachTo.getBoundingClientRect().top
           else if scope.position == 'bottom'
-            top = $attachTo.getBoundingClientRect().top + $attachTo.outerHeight() + yMargin
+            top = $attachTo.getBoundingClientRect().top + $attachTo.outerHeight + yMargin
           else if scope.position == 'top'
             bottom = window.innerHeight - $attachTo.getBoundingClientRect().top + yMargin
 
@@ -152,9 +152,6 @@ app.directive 'onboardingPopover', ['ngOnboardingDefaults', '$sce', '$timeout', 
         scope.positionClass = "onboarding-#{scope.position}"
       else
         scope.positionClass = null
-
-#    if scope.steps.length && !scope.index
-#      scope.index = 0
 
   template: """
               <div class='onboarding-container' ng-show='enabled'>

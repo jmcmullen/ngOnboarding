@@ -100,16 +100,18 @@ app.directive 'onboardingPopover', ['ngOnboardingDefaults', '$sce', '$timeout', 
       onboardingFocus = document.querySelectorAll('.onboarding-focus')
       $onboardingFocus = angular.element(onboardingFocus)
       $onboardingFocus.removeClass('onboarding-focus')
-      if showOverlay
-        if curStep['attachTo'] && scope.overlay
-          attachTo = document.querySelectorAll(curStep['attachTo'])[0]
-          $attachTo = angular.element(attachTo)
-          $attachTo.addClass('onboarding-focus')
+      #if showOverlay
+      #  if curStep['attachTo'] && scope.overlay
+      #    attachTo = document.querySelectorAll(curStep['attachTo'])[0]
+      #    $attachTo = angular.element(attachTo)
+      #    $attachTo.addClass('onboarding-focus')
 
     setupPositioning = ->
       # attachTo = curStep['attachTo']
       attachTo = document.querySelectorAll(curStep['attachTo'])[0]
       $attachTo = angular.element(attachTo)[0]
+      console.log('setupPositioning:', curStep['attachTo'], $attachTo)
+      window.scrollTo(0, $attachTo.offsetTop)
       scope.position = curStep['position']
       xMargin = 15
       yMargin = 15

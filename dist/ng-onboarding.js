@@ -111,25 +111,20 @@
             return setupPositioning();
           });
           setupOverlay = function(showOverlay) {
-            var $attachTo, $onboardingFocus, attachTo, onboardingFocus;
+            var $onboardingFocus, onboardingFocus;
             if (showOverlay == null) {
               showOverlay = true;
             }
             onboardingFocus = document.querySelectorAll('.onboarding-focus');
             $onboardingFocus = angular.element(onboardingFocus);
-            $onboardingFocus.removeClass('onboarding-focus');
-            if (showOverlay) {
-              if (curStep['attachTo'] && scope.overlay) {
-                attachTo = document.querySelectorAll(curStep['attachTo'])[0];
-                $attachTo = angular.element(attachTo);
-                return $attachTo.addClass('onboarding-focus');
-              }
-            }
+            return $onboardingFocus.removeClass('onboarding-focus');
           };
           return setupPositioning = function() {
             var $attachTo, attachTo, bottom, left, right, top, xMargin, yMargin;
             attachTo = document.querySelectorAll(curStep['attachTo'])[0];
             $attachTo = angular.element(attachTo)[0];
+            console.log('setupPositioning:', curStep['attachTo'], $attachTo);
+            window.scrollTo(0, $attachTo.offsetTop);
             scope.position = curStep['position'];
             xMargin = 15;
             yMargin = 15;
